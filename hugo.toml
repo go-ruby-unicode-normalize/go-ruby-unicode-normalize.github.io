@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-unicode-normalize.github.io/"
+title = "go-ruby-unicode-normalize"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Normalize"
+  status = "ready"
+  blurb = "`Normalize(s, form)` returns UTF-8 text in any of the four UAX #15 forms — NFC, NFD, NFKC, NFKD — matching Ruby's `String#unicode_normalize` byte-for-byte (NFC is the default form, mirroring Ruby's `:nfc`)."
+[[params.phases]]
+  name = "IsNormalized"
+  status = "ready"
+  blurb = "`IsNormalized(s, form)` reports whether a string is already in the given form — Ruby's `String#unicode_normalized?` — without rewriting the bytes."
+[[params.phases]]
+  name = "The four UAX #15 forms"
+  status = "ready"
+  blurb = "`NFC` / `NFD` / `NFKC` / `NFKD` as `Form` values mapping to Ruby's `:nfc` / `:nfd` / `:nfkc` / `:nfkd`; the zero value is `NFC`, and `Form.String` returns the Ruby symbol name for diagnostics and the rbgo binding."
+[[params.phases]]
+  name = "x/text core"
+  status = "ready"
+  blurb = "Heavy lifting delegated to the pure-Go (cgo-free) `golang.org/x/text/unicode/norm`; both MRI 4.0.5 and x/text target the same Unicode standard, so they agree on Hangul composition, ligatures, full/half-width folding and combining-mark ordering."
+[[params.phases]]
+  name = "Unicode 17.0.0 patch"
+  status = "ready"
+  blurb = "x/text gates its Unicode 17.0.0 tables behind the `go1.27` build tag and otherwise falls back to 15.0.0; an override table patches exactly the Unicode 16.0/17.0 characters that fallback would leave un-normalized, so the result matches MRI on every toolchain (and is a no-op on `go1.27+`)."
+[[params.phases]]
+  name = "MRI oracle & coverage"
+  status = "ready"
+  blurb = "Deterministic ruby-free tests hold statement coverage at 100%; differential oracle tests sweep every assigned scalar value × all four forms against the system `ruby`. Green across all six 64-bit Go arches and three OSes, cgo disabled."
