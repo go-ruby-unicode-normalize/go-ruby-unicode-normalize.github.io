@@ -41,11 +41,9 @@
   <div class="hero"><div class="wrap">
     <div>
       <h1 class="head">go-ruby-unicode-normalize</h1>
-      <p class="sub">Ruby's <code>String#unicode_normalize</code> in pure Go — the four UAX&nbsp;#15 forms, MRI-compatible, no cgo.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="/docs/">{{ partial "icons/book.html" . }}Documentation</a>
-        <a class="btn btn-ghost" href="https://github.com/go-ruby-unicode-normalize/unicode-normalize">{{ partial "icons/github.html" . }}GitHub</a>
-      </div>
+      <p class="sub">Ruby's <code>String#unicode_normalize</code> in {{ if partial "mantra-on.html" . }}Go{{ else }}pure Go{{ end }} — the four UAX&nbsp;#15 forms, MRI-compatible, {{ if not (partial "mantra-on.html" $) }}no cgo{{ end }}.</p>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
       <div class="trust">{{ if not (partial "mantra-on.html" $) }}<span class="pill">pure Go · zero cgo</span>{{ end }}<span class="pill">unicode_normalize stdlib</span><span class="pill">Normalize / IsNormalized</span><span class="pill">NFC · NFD · NFKC · NFKD</span><span class="pill">Unicode 17.0.0</span><span class="pill">x/text core + patch</span><span class="pill">MRI byte-exact</span><span class="pill">100% coverage</span><span class="pill">6 arches</span></div>
       <div class="legacy"><div class="badges">
       <a href="/docs/"><img alt="Documentation (MkDocs Material + mike)" src="https://img.shields.io/badge/docs-mkdocs--material-9B1C2E"></a>
